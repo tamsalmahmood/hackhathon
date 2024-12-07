@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coranu - Thoughts, Ideas, and Stories</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">
+        <span class="logo-icon"></span>
+        Coranu
+    </div>
+    <div class="search-bar">
+      <input type="text" placeholder="Search...">
+    </div>
+    <div class="auth-buttons">
+        <a href="login.html" class="login">Login</a>
+        <a href="./post.html" class="create post">Create Post</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Thoughts, Ideas, and Stories</h1>
+      <p>
+        A space where creativity flows, ideas take shape, and stories come to life. 
+        Dive in, explore, and connect with insights that inspire and resonate.
+      </p>
+    </section>
+
+    <section class="trending-topics">
+      <h2>Trending Topics</h2>
+      <div class="topics">
+        <button>Design Thinking</button>
+        <button>Technology</button>
+        <button>Web3</button>
+        <button>Programming</button>
+        <button>AI</button>
+      </div>
+    </section>
+
+    <section class="articles" id="posts-container">
+      <!-- Posts will be dynamically inserted here -->
+    </section>
+
+    <section class="newsletter">
+      <h2>Stay up to date</h2>
+      <p>Join Our Newsletter</p>
+      <form>
+        <input type="email" placeholder="Enter your email..." required>
+        <button type="submit">Submit</button>
+      </form>
+      <p class="unsubscribe">*You can unsubscribe anytime</p>
+    </section>
+  </main>
+
+  <script>
+    // Load and display posts from localStorage
+    window.addEventListener('DOMContentLoaded', function() {
+      const postsContainer = document.getElementById('posts-container');
+      const posts = JSON.parse(localStorage.getItem('posts')) || [];
+
+      posts.forEach(function(post) {
+        const article = document.createElement('article');
+        article.innerHTML = `
+          <h3>${post.title}</h3>
+          <p>${post.description}</p>
+          ${post.image ? `<img src="${post.image}" alt="Post image" style="max-width: 100px;">` : ''}
+          <div class="article-meta">
+            <span>Posted by you</span>
+            <span>Just now</span>
+          </div>
+        `;
+        postsContainer.appendChild(article);
+      });
+    });
+  </script>
+</body>
+</html>
+

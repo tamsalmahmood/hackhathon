@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Post</title>
+    <link rel="stylesheet" href="post.css">
+</head>
+<body>
+    <div class="post-container">
+        <h2>Create a New Post</h2>
+        <form id="create-post-form">
+            <input type="text" id="title" placeholder="Post Title" required><br>
+            <textarea id="description" placeholder="Write your post here..." rows="5" required></textarea><br>
+            <input type="file" id="image" accept="image/*"><br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        // Handle form submission
+        document.getElementById("create-post-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            // Get form values
+            const title = document.getElementById("title").value;
+            const description = document.getElementById("description").value;
+            const image = document.getElementById("image").files[0];
+
+            // Save post data to localStorage
+            const post = { title, description, image: image ? URL.createObjectURL(image) : null };
+            let posts = JSON.parse(localStorage.getItem('posts')) || [];
+            posts.push(post);
+            localStorage.setItem('posts', JSON.stringify(posts));
+
+            // After post is submitted, redirect to index.html
+            window.location.href = "index.html"; // Redirect to index page
+        });
+    </script>
+</body>
+</html>
+
